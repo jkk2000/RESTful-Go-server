@@ -30,8 +30,7 @@ func (s *store) postHandler(w http.ResponseWriter, r *http.Request) {
 	// Looping through contacts and find one with the id from the params
 	key := params["key"]
 	value := params["value"]
-	fmt.Fprintf(w, "Key = %s\n", key)
-	fmt.Fprintf(w, "Value = %s\n", value)
+	w.Write([]byte(fmt.Sprintf(`{"%s": "%s"}`, key, value)))
 	if _, ok := s.m[key]; !ok {
 		s.m[key] = value
 		fmt.Printf("Created entry!!\n")
